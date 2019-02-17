@@ -1,0 +1,19 @@
+{
+  "name": "Flash Cards",
+  "short_name": "PWA",
+  "description": "Just flash cards.",
+  "icons": [
+    {
+      "src": "/images/MegaMan_192x192.png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/images/MegaMan_512x512.png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#3E4EB8",
+  "theme_color": "#2F3BA2"
+}
