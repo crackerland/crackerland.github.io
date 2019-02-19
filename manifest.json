@@ -4,11 +4,11 @@
   "description": "Just flash cards.",
   "icons": [
     {
-      "src": "/images/MegaMan_192x192.png",
+      "src": "/images/FlashMan_192x192.png",
       "sizes": "192x192"
     },
     {
-      "src": "/images/MegaMan_512x512.png",
+      "src": "/images/FlashMan_512x512.png",
       "sizes": "512x512"
     }
   ],

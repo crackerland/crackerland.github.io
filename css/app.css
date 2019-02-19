@@ -297,6 +297,12 @@ body {
   .weather-forecast .current .pcount:before {
     content: "Pollen ";
     color: #888; }
+  .weather-forecast .current .question:before {
+    content: "Question: ";
+    color: #888; }
+  .weather-forecast .current .answer:before {
+    content: "Answer: ";
+    color: #888; }
 
 .weather-forecast .future {
   display: -webkit-box;

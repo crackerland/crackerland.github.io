@@ -13,15 +13,15 @@
 // limitations under the License.
 
 //var dataCacheName = 'flashCardsData-v0';
-var cacheName = 'flashCardsPwa-v1';
+var cacheName = 'flashCardsPwa-v0';
 var filesToCache = [
   '/',
-  '/html/CardView.html',
-  '/html/EditorPage.html',
-  '/html/EditEntryCardView.html',
+  //'/html/CardView.html',
+  //'/html/EditorPage.html',
+  //'/html/EditEntryCardView.html',
   //'/dist/bundle.js',
   '/index.html',
-  '/css/app.css',
+  //'/css/app.css',
   '/images/MegaMan_192x192.png',
   '/images/MegaMan_512x512.png',
 ];
