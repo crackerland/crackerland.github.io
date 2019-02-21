@@ -16,14 +16,16 @@
 var cacheName = 'flashCardsPwa-v0';
 var filesToCache = [
   '/',
-  //'/html/CardView.html',
-  //'/html/EditorPage.html',
-  //'/html/EditEntryCardView.html',
-  //'/dist/bundle.js',
+  '/html/CardView.html',
+  '/html/EditorPage.html',
+  '/html/EditEntryCardView.html',
+  '/dist/bundle.js',
   '/index.html',
-  //'/css/app.css',
-  '/images/MegaMan_192x192.png',
-  '/images/MegaMan_512x512.png',
+  '/css/app.css',
+  //'/css/materialize.min.css',
+  //'/js/materialize.min.js'
+  //'/images/FlashMan_192x192.png',
+  //'/images/FlashMan_512x512.png',
 ];
 
 self.addEventListener('install', function(e) {
@@ -64,24 +66,25 @@ self.addEventListener('activate', function(e) {
 });
 
 self.addEventListener('fetch', function (event) {
+    // Fetch first, then hit cache if offline.
+    event.respondWith(async function () {
+        try {
+            var request = event.request;
+            var response = await fetch(request);
+            var cache = await caches.open(cacheName);
+            cache.put(request.url, response.clone());
 
-    // Fetch first, then hit cache if offline for html.
-    //if (event.request.url.indexOf(".html") > -1) {
-    //    e.respondWith(
-    //        caches.open(dataCacheName).then(function (cache) {
-    //            return fetch(e.request).then(function (response) {
-    //                cache.put(e.request.url, response.clone());
-    //                return response;
-    //            });
-    //        }));
+            return response;
+        } catch {
+            return caches.match(event.request);
+        }
+    }());
 
-    //    return;
-    //}
-
-    event.respondWith(
-        caches.match(event.request).then(function (response) {
-            return response || fetch(event.request);
-        }));
+    // Cache, falling back to network.
+    //event.respondWith(
+    //    caches.match(event.request).then(function (response) {
+    //        return response || fetch(event.request);
+    //    }));
 });
 
 self.addEventListener('message', function (event) {
