@@ -12,41 +12,32 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//var dataCacheName = 'flashCardsData-v0';
-var cacheName = 'flashCardsPwa-v0';
+var cacheName = 'fractile-v0';
 var filesToCache = [
   '/',
-  '/html/CardView.html',
-  '/html/EditorPage.html',
-  '/html/EditEntryCardView.html',
-  '/dist/bundle.js',
-  '/index.html',
-  '/css/app.css',
-  //'/css/materialize.min.css',
-  //'/js/materialize.min.js'
-  //'/images/FlashMan_192x192.png',
-  //'/images/FlashMan_512x512.png',
+  // '/html/CardView.html',
+  // '/html/EditorPage.html',
+  // '/html/EditSpeakerCardView.html',
+  // '/html/RootPage.html',
+  // '/dist/bundle.js',
+  // '/index.html',
+  '/node_modules/materialize-css/dist/css/materialize.min.css',
+  '/node_modules/dropify/dist/css/dropify.min.css',
 ];
 
 self.addEventListener('install', function(e) {
-  console.log('[ServiceWorker] Install');
   e.waitUntil(
     caches.open(cacheName).then(function(cache) {
-      console.log('[ServiceWorker] Caching app shell');
       return cache.addAll(filesToCache);
     })
   );
 });
 
 self.addEventListener('activate', function(e) {
-  console.log('[ServiceWorker] Activate');
   e.waitUntil(
     caches.keys().then(function(keyList) {
       return Promise.all(keyList.map(function(key) {
-        // This allows for multiple caches
-        //if (key !== cacheName && key !== dataCacheName) {
         if (key !== cacheName) {
-          console.log('[ServiceWorker] Removing old cache', key);
           return caches.delete(key);
         }
       }));
@@ -79,12 +70,6 @@ self.addEventListener('fetch', function (event) {
             return caches.match(event.request);
         }
     }());
-
-    // Cache, falling back to network.
-    //event.respondWith(
-    //    caches.match(event.request).then(function (response) {
-    //        return response || fetch(event.request);
-    //    }));
 });
 
 self.addEventListener('message', function (event) {
@@ -92,36 +77,3 @@ self.addEventListener('message', function (event) {
     self.skipWaiting();
   }
 });
-
-//function fetch(e) {
-//    console.log('[Service Worker] Fetch', e.request.url);
-//    var dataUrl = 'https://query.yahooapis.com/v1/public/yql';
-//    if (e.request.url.indexOf(dataUrl) > -1) {
-//        /*
-//         * When the request URL contains dataUrl, the app is asking for fresh
-//         * weather data. In this case, the service worker always goes to the
-//         * network and then caches the response. This is called the "Cache then
-//         * network" strategy:
-//         * https://jakearchibald.com/2014/offline-cookbook/#cache-then-network
-//         */
-//        e.respondWith(
-//            caches.open(dataCacheName).then(function (cache) {
-//                return fetch(e.request).then(function (response) {
-//                    cache.put(e.request.url, response.clone());
-//                    return response;
-//                });
-//            })
-//        );
-//    } else {
-//        /*
-//         * The app is asking for app shell files. In this scenario the app uses the
-//         * "Cache, falling back to the network" offline strategy:
-//         * https://jakearchibald.com/2014/offline-cookbook/#cache-falling-back-to-network
-//         */
-//        e.respondWith(
-//            caches.match(e.request).then(function (response) {
-//                return response || fetch(e.request);
-//            })
-//        );
-//    }
-//}
