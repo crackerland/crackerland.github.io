@@ -1,0 +1,9 @@
+{
+  "imports": {
+    "dropify": "./dropify.js",
+    "jquery": "./jquery.js",
+    "materialize-css": "./materialize-css.js",
+    "rxjs": "./rxjs.js",
+    "ts-libs": "./ts-libs.js"
+  }
+}
