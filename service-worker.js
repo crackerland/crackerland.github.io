@@ -21,8 +21,7 @@ var filesToCache = [
   // '/html/RootPage.html',
   // '/dist/bundle.js',
   // '/index.html',
-  '/node_modules/materialize-css/dist/css/materialize.min.css',
-  '/node_modules/dropify/dist/css/dropify.min.css',
+  '/css/dropify.min.css',
 ];
 
 self.addEventListener('install', function(e) {
